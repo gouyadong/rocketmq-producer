@@ -1,0 +1,45 @@
+#rocketmq:
+##  name-server: 192.168.137.131:9876
+##  name-server: 10.11.41.204:9876
+#  name-server: 39.97.234.63:9876
+#
+#  producer:
+#    #此处group有个小坑
+#    group: my-group
+
+
+server:
+  port: 9999
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.137.131:9876
+#          name-server: 10.11.41.204:9876
+#          name-server: 39.97.234.63:9876
+      bindings:
+        output:
+          destination: stream-test-topic
+          content-type: application/json
+        bindings:
+          output:
+            producer:
+              group: binder-group
+#          sync: true
+
+          output1:
+            producer:
+              group: binder-group-output1
+          output2:
+            producer:
+              group: binder-group-output2
+        output1:
+          destination: test-output1
+          content-type: application/json
+        output2:
+          destination: test-output2
+          content-type: application/json
+
+logging:
+  level.org.springframework.web: debug
